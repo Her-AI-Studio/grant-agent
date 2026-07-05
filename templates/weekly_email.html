@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Grant Report</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+            color: #1a1a2e;
+        }
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 32px 24px;
+            border-radius: 12px 12px 0 0;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0 0 8px 0;
+            font-size: 24px;
+        }
+        .header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        .stats {
+            background: white;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-around;
+            border-bottom: 1px solid #e8ecf0;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .section {
+            background: white;
+            padding: 24px;
+            margin-bottom: 16px;
+            border-radius: 0 0 12px 12px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0f0f5;
+        }
+        .grant-card {
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid #e8ecf0;
+            border-radius: 8px;
+            transition: box-shadow 0.2s;
+        }
+        .grant-card:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .grant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        .grant-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+            color: #1a1a2e;
+        }
+        .grant-title a {
+            color: #1a1a2e;
+            text-decoration: none;
+        }
+        .grant-title a:hover {
+            color: #667eea;
+            text-decoration: underline;
+        }
+        .grant-source {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+        .grant-summary {
+            font-size: 14px;
+            color: #4b5563;
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+        .grant-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 8px;
+        }
+        .grant-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .grant-meta .label {
+            font-weight: 500;
+            color: #4b5563;
+        }
+        .grant-actions {
+            margin-top: 12px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #5a6fd6;
+        }
+        .btn-outline {
+            border: 1px solid #d1d5db;
+            color: #4b5563;
+        }
+        .btn-outline:hover {
+            background: #f9fafb;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 32px 16px;
+            color: #9ca3af;
+        }
+        .empty-state p {
+            font-size: 15px;
+            margin: 8px 0;
+        }
+        @media only screen and (max-width: 480px) {
+            .header { padding: 24px 16px; }
+            .header h1 { font-size: 20px; }
+            .stats { flex-wrap: wrap; gap: 12px; }
+            .grant-header { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🧭 Weekly Grant Report</h1>
+            <p>{{ organization_name }}</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">{{ total_sources }}</div>
+                <div class="stat-label">Sources</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">{{ total_grants_found }}</div>
+                <div class="stat-label">Grants Found</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">{{ total_scored }}</div>
+                <div class="stat-label">New This Week</div>
+            </div>
+        </div>
+
+        <!-- New Grants -->
+        <div class="section">
+            <h2 class="section-title">📋 New Grant Opportunities</h2>
+            {% if scored_grants %}
+                {% for grant, _ in scored_grants %}
+                <div class="grant-card">
+                    <div class="grant-header">
+                        <div>
+                            <h3 class="grant-title">
+                                <a href="{{ grant.url }}">{{ grant.title }}</a>
+                            </h3>
+                            <div class="grant-source">{{ grant.source }}</div>
+                        </div>
+                    </div>
+                    <div class="grant-summary">{{ grant.description[:300] }}{% if grant.description|length > 300 %}...{% endif %}</div>
+                    <div class="grant-meta">
+                        {% if grant.deadline and grant.deadline != "Not specified" %}
+                        <span><span class="label">Deadline:</span> {{ grant.deadline }}</span>
+                        {% endif %}
+                        {% if grant.amount and grant.amount != "Not specified" %}
+                        <span><span class="label">Amount:</span> {{ grant.amount }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="grant-actions">
+                        <a href="{{ grant.url }}" class="btn btn-primary" target="_blank">View Grant</a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <p>No new grants found this week.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Generated by Grant Agent · {{ organization_name }}</p>
+            <p>Configured to monitor {{ total_sources }} grant sources.</p>
+        </div>
+    </div>
+</body>
+</html>
