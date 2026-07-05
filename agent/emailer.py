@@ -66,7 +66,7 @@ def send_email(
     msg["From"] = config["from_email"]
     msg["To"] = config["to_email"]
 
-    part = MIMEText(html_body, "html")
+    part = MIMEText(html_body, "html", "utf-8")
     msg.attach(part)
 
     try:
