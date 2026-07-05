@@ -61,7 +61,7 @@ def send_email(
         print(f"[INFO] Subject: {subject}")
         return False
 
-    msg = MIMEMultipart("alternative")
+    msg = MIMEMultipart("alternative", charset="utf-8")
     msg["Subject"] = subject
     msg["From"] = config["from_email"]
     msg["To"] = config["to_email"]
