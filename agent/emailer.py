@@ -34,14 +34,9 @@ def render_email_html(
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
     template = env.get_template("weekly_email.html")
 
-    # Separate into tiers
-    excellent = [(g, s) for g, s in scored_grants if s.get("score", 0) >= 70]
-    good = [(g, s) for g, s in scored_grants if 40 <= s.get("score", 0) < 70]
-
     return template.render(
         organization_name=organization_name,
-        excellent=excellent,
-        good=good,
+        scored_grants=scored_grants,
         total_sources=total_sources,
         total_grants_found=total_grants_found,
         total_scored=len(scored_grants),
