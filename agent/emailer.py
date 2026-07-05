@@ -61,7 +61,7 @@ def send_email(
         print(f"[INFO] Subject: {subject}")
         return False
 
-    msg = MIMEMultipart("alternative", charset="utf-8")
+    msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
     msg["From"] = config["from_email"]
     msg["To"] = config["to_email"]
@@ -73,7 +73,7 @@ def send_email(
         with smtplib.SMTP(config["smtp_host"], config["smtp_port"]) as server:
             server.starttls()
             server.login(config["smtp_user"], config["smtp_password"])
-            server.sendmail(config["from_email"], config["to_email"], msg.as_string())
+            server.sendmail(config["from_email"], config["to_email"], msg.as_bytes())
         print(f"[OK] Email sent to {config['to_email']}")
         return True
     except Exception as e:
