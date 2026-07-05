@@ -22,7 +22,7 @@ SOURCES: list[GrantSource] = [
     ),
     GrantSource(
         name="National Science Foundation",
-        url="https://www.nsf.gov/rss/rss_grants_feed.xml",
+        url="https://www.nsf.gov/rss/rss_www_funding_pgm_annc_inf.xml",
         type="rss",
         description="NSF funding opportunities across all sciences",
     ),
@@ -38,40 +38,18 @@ SOURCES: list[GrantSource] = [
         type="rss",
         description="Google philanthropic funding and AI for Social Good",
     ),
+  
     GrantSource(
-        name="GitHub Social Impact",
-        url="https://github.blog/category/social-impact/feed/",
+        name="Mozilla Open Source Support",
+        url="https://www.mozillafoundation.org/en/what-we-do/grantmaking/",
         type="rss",
-        description="GitHub grants, open-source funding, and social impact programs",
+        description="Mozilla grants for open-source software projects",
     ),
-    GrantSource(
-        name="Microsoft Philanthropies",
-        url="https://www.microsoft.com/en-us/philanthropies/feed/",
-        type="rss",
-        description="Microsoft grants for nonprofits and education",
-    ),
-    GrantSource(
-        name="NVIDIA",
-        url="https://www.nvidia.com/en-us/about-nvidia/corporate-giving/",
-        type="page",
-        description="NVIDIA foundation grants and donation programs",
-    ),
+
     GrantSource(
         name="Motorola Foundation",
         url="https://www.motorolasolutions.com/en_us/about/company-overview/corporate-responsibility/motorola-solutions-foundation.html",
         type="page",
         description="Motorola Solutions Foundation grant programs",
-    ),
-    GrantSource(
-        name="Infosys Foundation USA",
-        url="https://www.infosys.org/infosys-foundation-usa/",
-        type="page",
-        description="Infosys Foundation USA grants for CS education",
-    ),
-    GrantSource(
-        name="AWS Imagine Grant",
-        url="https://aws.amazon.com/grants/",
-        type="page",
-        description="AWS Imagine Grant for nonprofits using cloud technology",
-    ),
+    )
 ]
